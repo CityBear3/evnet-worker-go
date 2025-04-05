@@ -1,0 +1,64 @@
+# Go related
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+*.test
+*.out
+go.work
+
+# Binary output directories
+/bin/
+/dist/
+
+# Dependencies
+/vendor/
+
+# IDE and editor settings
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# macOS related
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+# Environment variable files
+.env
+.envrc
+
+# Terraform related
+terraform/environment/local/.terraform/
+*.tfstate
+*.tfstate.*
+*.tfvars
+terraform.tfvars
+terraform.tfvars.json
+.terraformrc
+terraform.rc
+.terraform.lock.hcl
+crash.log
+crash.*.log
+
+# Log files
+*.log
+
+# Test related
+coverage.txt
+profile.out
+
+# Docker related
+.dockerignore
+
+# Temporary files
+tmp/
+temp/
+
+# Compiled objects
+*.o
+*.a
