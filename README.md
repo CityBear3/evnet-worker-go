@@ -32,7 +32,7 @@ This project is experimental and may not implement best practices, comprehensive
 export PUBSUB_PROJECT_ID=local-project
 
 # Start the PubSub emulator using Docker Compose
-docker-compose up -d
+docker compose up -d
 ```
 
 2. Set up the PubSub topics and subscriptions:
