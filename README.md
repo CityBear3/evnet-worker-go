@@ -26,22 +26,37 @@ The system consists of two main components:
 1. **Event Publisher**: Publishes events to a Pub/Sub topic
 2. **Event Worker**: Subscribes to the topic and processes events using a worker pool
 
+```mermaid
+flowchart LR
+    Publisher["Event Publisher"] --> PubSub["Google Pub/Sub"]
+    PubSub --> Worker["Event Worker"]
+    Worker --> Pool["Worker Pool\n(Concurrent Processing)"]
 ```
-┌─────────────────┐     ┌───────────────┐     ┌─────────────────┐
-│                 │     │               │     │                 │
-│  Event          │────▶│  Google       │────▶│  Event          │
-│  Publisher      │     │  Pub/Sub      │     │  Worker         │
-│                 │     │               │     │                 │
-└─────────────────┘     └───────────────┘     └─────────────────┘
-                                                      │
-                                                      ▼
-                                              ┌─────────────────┐
-                                              │                 │
-                                              │  Worker Pool    │
-                                              │  (Concurrent    │
-                                              │   Processing)   │
-                                              │                 │
-                                              └─────────────────┘
+
+### Sequence Diagram
+
+The following sequence diagram illustrates the event processing flow:
+
+```mermaid
+sequenceDiagram
+    box Client System
+        participant Publisher as Event Publisher
+    end
+    box Message Broker
+        participant PubSub as Google Pub/Sub
+    end
+    box Event Worker System
+        participant Worker as Event Worker
+        participant Pool as Worker Pool
+        participant Workers as Worker Goroutines
+    end
+
+    Publisher->>PubSub: Publish PaymentMethodCreated event
+    PubSub->>Worker: Deliver event via subscription
+    Worker->>Pool: Add event to task queue
+    Pool->>Workers: Distribute tasks to workers
+    Workers->>Workers: Process event
+    Workers->>PubSub: Acknowledge event
 ```
 
 ### Event Flow
