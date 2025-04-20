@@ -18,7 +18,71 @@ This project is experimental and may not implement best practices, comprehensive
 
 ## Development
 
-Development instructions and setup procedures will be added later.
+### Prerequisites
+
+- Go 1.24 or later
+- Docker and Docker Compose
+
+### Setup
+
+1. Start the PubSub emulator:
+
+```bash
+# Set the project ID for the PubSub emulator
+export PUBSUB_PROJECT_ID=local-project
+
+# Start the PubSub emulator using Docker Compose
+docker-compose up -d
+```
+
+2. Set up the PubSub topics and subscriptions:
+
+```bash
+# Run the setup-pubsub target from the Makefile
+make setup-pubsub
+```
+
+### Build
+
+To build the applications:
+
+```bash
+# Build the event worker
+go build -o bin/event_worker cmd/event_worker/main.go
+
+# Build the event publisher
+go build -o bin/event_publish cmd/event_publish/main.go
+
+# Build all applications
+go build ./...
+```
+
+### Run
+
+To run the applications:
+
+```bash
+# Run the event worker
+go run cmd/event_worker/main.go
+
+# Run the event publisher
+go run cmd/event_publish/main.go
+```
+
+### Test
+
+To run the tests:
+
+```bash
+# Run all tests
+go test ./...
+
+# Run tests with verbose output
+go test -v ./...
+
+# Run tests for a specific package
+go test -v ./internal/core/env
+```
 
 ## License
 
