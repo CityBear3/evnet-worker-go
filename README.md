@@ -1,3 +1,4 @@
+[![Build](https://github.com/CityBear3/evnet-worker-go/actions/workflows/build.yaml/badge.svg)](https://github.com/CityBear3/evnet-worker-go/actions/workflows/build.yaml)
 # Event Worker System
 
 ## Overview
