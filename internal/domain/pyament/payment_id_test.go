@@ -4,6 +4,7 @@ import (
 	"testing"
 
 	"github.com/google/uuid"
+	"github.com/stretchr/testify/assert"
 )
 
 func TestParsePaymentID(t *testing.T) {
@@ -45,14 +46,10 @@ func TestParsePaymentID(t *testing.T) {
 
 			// If no error expected, check the returned ID
 			if !tt.wantErr {
-				if got != tt.want {
-					t.Errorf("ParsePaymentID() = %v, want %v", got, tt.want)
-				}
+				assert.Equalf(t, tt.idStr, got.String(), "ParsePaymentID() = %v, want %v", got, tt.want)
 
 				// Also check that the string representation matches
-				if got.String() != tt.idStr {
-					t.Errorf("ParsePaymentID().String() = %q, want %q", got.String(), tt.idStr)
-				}
+				assert.Equalf(t, tt.idStr, got.String(), "ParsePaymentID().String() = %v, want %v", got.String(), tt.idStr)
 			}
 		})
 	}
